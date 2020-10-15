@@ -10,25 +10,27 @@ const cardDiv = document.querySelector('.card');
 function fetchData(url) {
     fetch(url)
         .then(response => response.json())
-        .then(getRandomPeople)
+        .then(getRandomEmployees)
         .then(generateCards)
         .catch(error => console.log('There was a problem with the fetch request',error));
 }
 
 
 
-// Get the random peoples data such as profileIMG,name,email,city,state 
-function getRandomPeople(data) {
-    const randomPeople = data.results.map(employee => {
+
+// Get the random employees data such as profileIMG,name,email,city,state 
+function getRandomEmployees(data) {
+    const randomEmployees = data.results.map(employee => {
         return employee;
     })
-   return randomPeople; 
+   return randomEmployees; 
 }
 
 
 
-function generateCards(data) {
-    data.map(person => {
+
+function generateCards(employees) {
+    employees.map(person => {
         galleryDiv.insertAdjacentHTML('beforeend', `
             <div class="card">
                 <div class="card-img-container">
@@ -42,7 +44,7 @@ function generateCards(data) {
                 </div>
             </div>
         `)    
-    })
+    });
 }
 
 
