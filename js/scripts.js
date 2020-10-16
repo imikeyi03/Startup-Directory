@@ -2,11 +2,10 @@
 const apiURL = 'https://randomuser.me/api/?results=12';
 const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
-const cardDiv = document.querySelector('.card');
 let employees = {};
 
 
-// Fetch data based on based in url
+// Fetch data based on url
 function fetchData(url) {
     return fetch(url)
         .then(response => response.json())
@@ -15,6 +14,13 @@ function fetchData(url) {
             return data.results;
         })
         .then(generateCards)
+        .then(cards => {
+            for(let i = 0; i < cards.length; i++) {
+                cards[i].addEventListener('click', (e) => {
+                    console.log(e.currentTarget);
+                })
+            }
+        })
         .catch(error => console.log('There was a problem with the fetch request',error));
 }
 
@@ -35,13 +41,8 @@ function generateCards(data) {
             </div>
         `)    
     });
+    return galleryDiv.children;
 }
 
-function handleCardClick() {
-    let cardDIV = document.getElementsByClassName('card');
-    cardDIV.addEventListener('click', (e) => {
-        console.log('hi');
-    })
-}
 
 fetchData(apiURL);
