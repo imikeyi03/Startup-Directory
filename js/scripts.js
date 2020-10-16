@@ -3,6 +3,8 @@ const apiURL = 'https://randomuser.me/api/?results=12';
 const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
 let employees = {};
+let cardsList = {};
+let index = ''
 
 
 // Fetch data based on url
@@ -11,23 +13,35 @@ function fetchData(url) {
         .then(response => response.json())
         .then(data => {
             employees = data.results
-            return data.results;
+            return employees;
         })
         .then(generateCards)
         .then(cards => {
+            cardsList = Array.from(cards);
+
             for(let i = 0; i < cards.length; i++) {
                 cards[i].addEventListener('click', (e) => {
-                    console.log(e.currentTarget);
+                    if(cards[i] === e.currentTarget) {
+                        console.log(employees);
+                        index = cardsList.indexOf(e.currentTarget);
+                        console.log(cardsList);
+                    }
+                    handleCardClick(employees[index]);
                 })
+               
             }
+            
         })
         .catch(error => console.log('There was a problem with the fetch request',error));
 }
 
+function handleCardClick(index) {
+    console.log(index);
+}
 
 function generateCards(data) {
     data.map(employee => {
-        galleryDiv.insertAdjacentHTML('afterbegin', `
+        const html = `
             <div class="card">
                 <div class="card-img-container">
                     <img class="card-img" src="${employee.picture.large}" alt="Profile Pic">
@@ -39,10 +53,14 @@ function generateCards(data) {
                     </div>
                 </div>
             </div>
-        `)    
+        `;
+        galleryDiv.insertAdjacentHTML('beforeEnd', html);    
     });
-    return galleryDiv.children;
+    return galleryDiv.children
 }
+
+
+
 
 
 fetchData(apiURL);
