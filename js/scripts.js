@@ -4,11 +4,8 @@ const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
 const body = document.querySelector('body');
 let employees = {};
-<<<<<<< HEAD
 let cardsList = [];
-=======
 let index = '';
->>>>>>> ff61df4d7a84a2366b5429f9a6fcc002a22f84f2
 
 
 // Fetch data based on url
