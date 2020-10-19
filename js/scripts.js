@@ -31,7 +31,6 @@ function fetchData(url) {
                 })
                
             }
-            
         })
         .catch(error => console.log('There was a problem with the fetch request',error));
 }
@@ -59,7 +58,15 @@ function handleCardClick(employee,index) {
     </div>
     `;
     body.insertAdjacentHTML('beforeEnd', html)
+
+    const modalContainer = document.querySelector('.modal-container');
+    const modalBtn = document.querySelector('#modal-close-btn');
+    modalBtn.addEventListener('click', (e) => {
+        modalContainer.remove();
+    })
 }
+
+
 
 
 

@@ -8,6 +8,10 @@
 	box-sizing: border-box;
 }
 
+.hide-n-seek {
+    display: none;
+}
+
 html, body {
     width: 100%;
     max-width: 100%;
