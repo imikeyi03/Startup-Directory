@@ -4,7 +4,7 @@ const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
 const body = document.querySelector('body');
 let employees = {};
-let cardsList = {};
+let cardsList = [];
 let index = ''
 
 
