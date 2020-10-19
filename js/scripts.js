@@ -1,11 +1,11 @@
 // Global variables
-const apiURL = 'https://randomuser.me/api/?results=12';
+const apiURL = 'https://randomuser.me/api/?results=12&nat=us';
 const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
 const body = document.querySelector('body');
 let employees = {};
 let cardsList = {};
-let index = ''
+let index = '';
 
 
 // Fetch data based on url
