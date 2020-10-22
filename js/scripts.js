@@ -48,12 +48,7 @@ function handleCardClick(employee,index) {
             <hr>
             <p class="modal-text">${employee.cell}</p>
             <p class="modal-text">${employee.location.street.number} ${employee.location.street.name}, ${employee.location.city}, ${employee.location.state} ${employee.location.postcode}</p>
-            <p class="modal-text">Birthday: ${employee.dob.date}</p>
-        </div>
-    </div>
-    <div class="modal-btn-container">
-            <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-            <button type="button" id="modal-next" class="modal-next btn">Next</button>
+            <p class="modal-text">Birthday: ${employee.dob.date.slice(5,7)}/${employee.dob.date.slice(8,10)}/${employee.dob.date.slice(0,4)}</p>
         </div>
     </div>
     `;
@@ -65,9 +60,6 @@ function handleCardClick(employee,index) {
         modalContainer.remove();
     })
 }
-
-
-
 
 
 function generateCards(data) {
