@@ -8,26 +8,31 @@ let cardsList = [];
 let index = '';
 
 
-// Fetch data based on url
+// Fetch data based on url passed
 function fetchData(url) {
     return fetch(url)
         .then(response => response.json())
+        // Create a reference variable to the employee results
         .then(data => {
             employees = data.results
             return employees;
         })
+        // Generate the employee cards
         .then(generateCards)
+        // Create an array from the gallery div Children
         .then(cards => {
             cardsList = Array.from(cards);
 
+            // Iterate over all the cards
             for(let i = 0; i < cards.length; i++) {
+                // If a card is clicked, find it's current target and set the index to the matching index in the cardsList
                 cards[i].addEventListener('click', (e) => {
                     if(cards[i] === e.currentTarget) {
-                        console.log(employees);
                         index = cardsList.indexOf(e.currentTarget);
-                        console.log(cardsList);
                     }
-                    handleCardClick(employees[index],index);
+                    
+                    //Pass the matching employee, at that index, to handleCardClick() to display the modal 
+                    handleCardClick(employees[index]);
                 })
                
             }
@@ -35,7 +40,9 @@ function fetchData(url) {
         .catch(error => console.log('There was a problem with the fetch request',error));
 }
 
-function handleCardClick(employee,index) {
+// When a card is clicked, display the modal
+
+function handleCardClick(employee) {
     const html = `
     <div class="modal-container">
     <div class="modal">
@@ -46,7 +53,7 @@ function handleCardClick(employee,index) {
             <p class="modal-text">${employee.email}</p>
             <p class="modal-text cap">${employee.location.city}</p>
             <hr>
-            <p class="modal-text">${employee.cell}</p>
+            <p class="modal-text">${employee.cell.slice(0,5)} ${employee.cell.slice(6,14)}</p>
             <p class="modal-text">${employee.location.street.number} ${employee.location.street.name}, ${employee.location.city}, ${employee.location.state} ${employee.location.postcode}</p>
             <p class="modal-text">Birthday: ${employee.dob.date.slice(5,7)}/${employee.dob.date.slice(8,10)}/${employee.dob.date.slice(0,4)}</p>
         </div>
@@ -54,13 +61,17 @@ function handleCardClick(employee,index) {
     `;
     body.insertAdjacentHTML('beforeEnd', html)
 
+    // Select the modal & on a click event on the close btn, remove() the modal from the DOM
+
     const modalContainer = document.querySelector('.modal-container');
     const modalBtn = document.querySelector('#modal-close-btn');
-    modalBtn.addEventListener('click', (e) => {
+    
+    modalBtn.addEventListener('click', () => {
         modalContainer.remove();
     })
 }
 
+// Maps over each employee returned from Fetch and displays them in cards
 
 function generateCards(data) {
     data.map(employee => {
@@ -85,5 +96,5 @@ function generateCards(data) {
 
 
 
-
+// Fetch the data from the randomUsers API
 fetchData(apiURL);
