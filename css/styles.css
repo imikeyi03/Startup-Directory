@@ -97,7 +97,7 @@ header h1 {
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
     overflow: hidden;
-    filter: drop-shadow(0 0 0.75rem #4DA8DA);
+    filter: drop-shadow(0 0 0.35rem #4DA8DA);
 }
 
 .card-img {
